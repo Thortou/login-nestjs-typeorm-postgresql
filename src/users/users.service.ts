@@ -10,7 +10,14 @@ export class User {
 @Injectable()
 export class UsersService {
 
-  private readonly DBuser: User[] = [{id:1, username:'admin', password: '1234'}]
+  private readonly DBuser: User[] = [
+    {id:1, username:'admin', password: '1234'},
+    {id:2, username:'manager', password: '1234'},
+    {id:3, username:'user', password: '1234'},
+    {id:4, username:'SPadmin', password: '1234'},
+    {id:5, username:'Uadmin', password: '1234'},
+    {id:6, username:'UnderAdin', password: '1234'},
+]
    create(createUser: User) : User{
     const already = this.DBuser.find((user) => user.username === createUser.username);
     if(already) {
@@ -31,6 +38,10 @@ export class UsersService {
       return data
     }
     return {message:'Your data is Emtpy...'}
+  }
+
+  async findOneuser(username: string): Promise<User | undefined> {
+    return this.DBuser.find(user => user.username === username);
   }
 
   updateUser(id: number, updateUserDto: Partial<User>): User {
